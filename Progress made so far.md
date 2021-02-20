@@ -24,6 +24,10 @@
   - Used the Feedback component to alleviate some of this issue
   - Problem: feedback message is unstyled - text is huge
 
-
-
 ![image-20210220130318894](Progress made so far.assets/image-20210220130318894.png)
+
+
+20/02 3:30pm
+- Added github repo https://github.com/Toshi-Tabata/FrankenswitchForm
+- Broke down requirements further, still need to break each down
+
