@@ -1,0 +1,16 @@
+.Input {
+    width: 100%;
+}
+
+.InputImg {
+}
+
+.InputImgContainer {
+    display: flex;
+    justify-content: center;
+    width: 30px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+}
+
+

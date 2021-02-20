@@ -1,0 +1,20 @@
+
+.FrankenForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.FFContainer {
+    width: 80%;
+
+}
+
+.FFInput {
+    width: 100%;
+}
+
+.FFTitle {
+    margin-bottom: 2%;
+}
