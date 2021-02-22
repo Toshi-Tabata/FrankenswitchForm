@@ -77,3 +77,8 @@
 
 - Finally populated the switch table somewhat nicely. Most switches are present. there's some inconsistent formatting in the spreadsheet that is getting sorted so those switches are missing (e.g. razer switches don't have names)
 
+
+
+
+
+![image-20210222225224206](Progress made so far.assets/image-20210222225224206.png)

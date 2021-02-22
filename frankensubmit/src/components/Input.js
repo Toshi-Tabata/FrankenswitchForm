@@ -8,17 +8,21 @@ import top from "../img/topHousing.svg";
 import bottom from "../img/bottomHousing.svg";
 import spring from "../img/spring.svg";
 
-function getDataFromBackend(type) {
-  switch (type) {
-    case "Switch":
-      return ["gateron", "jwk", "cherry"];
+async function getDataFromBackend(type) {
 
-    case "Spring":
-      return ["Any", "68g", "100g", "78g"];
 
-    default:
-      return [""];
-  }
+
+
+  // switch (type) {
+  //   case "Switch":
+  //     return ["gateron", "jwk", "cherry"];
+  //
+  //   case "Spring":
+  //     return ["Any", "68g", "100g", "78g"];
+  //
+  //   default:
+  //     return [""];
+  // }
 }
 
 function getPart(part) {
@@ -58,7 +62,6 @@ function getPart(part) {
 }
 
 export default function Input(props) {
-  let options = getDataFromBackend(props.type)
 
   function handleChange(choice) {
     let oldChoice = {...props.input}
@@ -88,7 +91,7 @@ export default function Input(props) {
         labelKey="name"
         onChange={(choice) => {handleChange(choice)}}
         placeholder={"Choose a " + props.type}
-        options={options}
+        options={props.data}
         isInvalid={props.input[props.name]["part"].length === 0}
       />
       {props.children}

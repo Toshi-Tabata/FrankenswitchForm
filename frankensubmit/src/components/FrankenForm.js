@@ -7,6 +7,39 @@ import Alert from "react-bootstrap/Alert";
 
 const choiceError = "Please Choose a Switch from the dropdown";
 
+async function getSwitches() {
+  const url = `http://localhost:1337`;
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  let res = await fetch(url + "/switches", options);
+  return res.json();
+
+}
+
+async function submitCombo(top, stem, bottom) {
+  const url = `http://localhost:1337`;
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({top, stem, bottom})
+  };
+
+  let res = await fetch(url + "/submit", options);
+  return res.json();
+
+}
+
+
+
 export default function FrankenForm() {
   const [parts, setParts] = React.useState({
     "Top Housing": {part: [], error: "a"},
@@ -15,6 +48,20 @@ export default function FrankenForm() {
     "Bottom Housing": {part: [], error: "d"},
   });
   const [invalid, setInvalid] = React.useState(false);
+
+  const [switchData, setSwitchData] = React.useState([""]);
+
+
+  React.useEffect(() => {
+    async function updateOptions() {
+      const res = await getSwitches();
+      setSwitchData(res);
+
+    }
+
+    updateOptions()
+
+  }, []);
 
   function validateFranken() {
     // TODO: set API request to backend which will verify that the combo works/doesn't work
@@ -43,6 +90,7 @@ export default function FrankenForm() {
     e.preventDefault();
     e.stopPropagation();
 
+    submitCombo(parts["Top Housing"], parts["Stem"], parts["Bottom Housing"])
     validateFranken();
 
     console.log(parts);
@@ -58,17 +106,17 @@ export default function FrankenForm() {
         <Form onSubmit={(e) => {handleSubmit(e)}}>
           <Form.Group>
 
-            <Input className={"FFInput"} name={"Top Housing"} type={"Switch"} setInput={setParts} input={parts}>
+            <Input className={"FFInput"} name={"Top Housing"} type={"Switch"} setInput={setParts} input={parts} data={switchData}>
               <Form.Control.Feedback type={"invalid"}>{choiceError}</Form.Control.Feedback>
             </Input>
 
-            <Input className={"FFInput"} name={"Stem"} type={"Switch"} setInput={setParts} input={parts}>
+            <Input className={"FFInput"} name={"Stem"} type={"Switch"} setInput={setParts} input={parts} data={switchData}>
               <Form.Control.Feedback type={"invalid"}>{choiceError}</Form.Control.Feedback>
             </Input>
-            <Input className={"FFInput"} name={"Spring"} type={"Spring"} setInput={setParts} input={parts}>
+            <Input className={"FFInput"} name={"Spring"} type={"Spring"} setInput={setParts} input={parts} data={switchData}>
               <Form.Control.Feedback type={"invalid"}>{choiceError}</Form.Control.Feedback>
             </Input>
-            <Input className={"FFInput"} name={"Bottom Housing"} type={"Switch"} setInput={setParts} input={parts}>
+            <Input className={"FFInput"} name={"Bottom Housing"} type={"Switch"} setInput={setParts} input={parts} data={switchData}>
               <Form.Control.Feedback type={"invalid"}>{choiceError}</Form.Control.Feedback>
             </Input>
             <Button variant="dark" type="submit">

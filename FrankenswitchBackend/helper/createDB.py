@@ -1,8 +1,11 @@
 from psycopg2 import connect, extensions, sql
-from switchDataParse import get_switch_info
+from switchDataParse import get_switch_info, insert_frankenswitch
+import os
 import json
 
-with open('token.json') as f:
+
+token = os.path.split(os.path.dirname(__file__))[0]
+with open(token + '/helper/token.json') as f:
     data = json.load(f)
     print(data)
     password = data["password"]
@@ -100,13 +103,66 @@ def populate_tables():
 
 # cursor.execute("DROP TABLE top, bottom, stem, blacklist, manufacturer;")
 # populate_tables()
-cursor.execute("SELECT * FROM top;")
-print(cursor.fetchall())
+
+def add_blacklist(top, stem, bottom):
+    cursor.execute("INSERT INTO blacklist(top, stem, bottom) VALUES (%s, %s, %s);", (top, stem, bottom))
 
 
-conn.commit()
-cursor.close()
-conn.close()
+def fill_blacklist():
+    cursor.execute("SELECT * FROM top WHERE name LIKE '%panda%' AND manufacturer LIKE 'bsun%';")
+    cursor.execute("SELECT * FROM top WHERE manufacturer='outemu';")
+    bottoms = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM bottom WHERE name LIKE 'mod%';")
+    cursor.execute("SELECT * FROM top WHERE manufacturer='cherry';")
+    cursor.execute("SELECT * FROM top WHERE manufacturer='outemu';")
+
+    tops = cursor.fetchall()
+
+    for top in tops:
+        for bottom in bottoms:
+            add_blacklist(top[0], None, bottom[0])
+
+# fill_blacklist()  # run this if you need to populate blacklist again
+
+def get_switches():
+    cursor.execute("SELECT * FROM top;")
+    switches = cursor.fetchall()
+
+    res = []
+    for switch in switches:
+        # TODO: this was short sighted since i need to undo this when it gets the info back. let frontend handle it?
+        string = switch[1] + " " + switch[0] if switch[1] else switch[0]
+        res.append(string)
+
+    res.sort()
+    return res
+
+def submitCombo(top, stem, bottom):
+    # silent white, phoenix
+    print("checking", top, stem, bottom)
+    cursor.execute("SELECT * FROM blacklist WHERE "
+                   "(top, bottom) = (%s, %s) OR"
+                   "(top, stem) = (%s, %s) OR"
+                   "(stem, bottom) = (%s, %s);", (top, bottom, top, stem, stem, bottom))
+
+    found = cursor.fetchall()
+    if len(found) > 0:
+        # TODO: handle error
+        invalid = [part for part in found[0] if part is not None]
+        msg = "Invalid combo with "
+        msg += ', '.join(invalid)
+        return msg
+    else:
+        # TODO: add to spreadsheet
+        insert_frankenswitch(top, stem, bottom)
+        return ""
+
+
+def close():
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 
 
