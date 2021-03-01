@@ -1,10 +1,9 @@
-import createDB
+import accessDB
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
+from db_helper import get_cursor
 import logging
 
-# TODO: create the flask server to communicate with frontend
-# figure out what end points i want
 APP = Flask(__name__)
 log = logging.getLogger("werkzeug")
 log.setLevel(logging.ERROR)
@@ -17,7 +16,7 @@ def switches():
     req = request.data.decode("utf-8")
     print(request.data)
     print(req)
-    return jsonify(createDB.get_switches())
+    return jsonify(accessDB.get_switches(get_cursor()))
 
 
 @APP.route("/submit", methods=["POST"])
@@ -27,10 +26,11 @@ def submit():
     top = req["top"]["part"][0]
     stem = req["stem"]["part"][0]
     bottom = req["bottom"]["part"][0]
-    error = createDB.submitCombo(top, stem, bottom)
+    error = accessDB.submitCombo(top, stem, bottom, get_cursor())
     return jsonify({"error": error})
 
 
 APP.run(port=1337)
 
-createDB.close()
+# TODO: Connection never gets closed
+# accessDB.close()

@@ -79,6 +79,25 @@
 
 
 
+22/02 6:30pm-11:30pm
+
+- Fixed relative imports to be absolute so they work everywhere (including opening files)
+- Got switches from the switch database spreadsheet, created a database and populated it
+- Populated the blacklist database by manually blacklisting certain know incompatibilities between manufacturers
+- Created flask server that can interact with frontend - two endpoints, one for getting list of switches and one for submitting switches
+- Submitted switches get checked against the blacklist database for any incompatibilities, but is currently broken because I concatenated the manufacturer with the switchname and can't undo it. oversight which can easily be fixed
+- Submitted switches get put into a test spreadsheet
+- Frontend altered to reduce number of api calls required but still some stuff with input component being very repetitive. will create function to reduce it eventually
+
 
 
 ![image-20210222225224206](Progress made so far.assets/image-20210222225224206.png)
+
+
+1/03/ 1pm - 3pm
+- Prevented duplicate submission with error message
+- prevented submission of invalid combinations with error message
+- added database to backend for frankenswitches
+- refactored backend's postgres database creation into its own modules
+- refactored cursor so that it is passed around instead of being a global variable
+    - might be a problem since connection never gets closed

@@ -10,9 +10,6 @@ import spring from "../img/spring.svg";
 
 async function getDataFromBackend(type) {
 
-
-
-
   // switch (type) {
   //   case "Switch":
   //     return ["gateron", "jwk", "cherry"];
@@ -78,6 +75,7 @@ export default function Input(props) {
         {getPart(props.name)}
       </div>
       <Typeahead
+        filterBy={["manufacturer", "name"]}
         className={props.input[props.name]["part"].length === 0 ? "is-invalid" : ""}
         inputProps={
           {
@@ -88,11 +86,19 @@ export default function Input(props) {
           }
         }
         id="basic-typeahead-single"
-        labelKey="name"
+        labelKey={option => `${option.manufacturer} ${option.name}`}
         onChange={(choice) => {handleChange(choice)}}
         placeholder={"Choose a " + props.type}
         options={props.data}
         isInvalid={props.input[props.name]["part"].length === 0}
+        renderMenuItemChildren={(option) => (
+          <div>
+            {option.name}
+            <div>
+              <small>Manufacturer: {option.manufacturer}</small>
+            </div>
+          </div>
+        )}
       />
       {props.children}
     </div>

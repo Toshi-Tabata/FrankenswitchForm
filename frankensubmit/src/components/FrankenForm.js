@@ -19,7 +19,6 @@ async function getSwitches() {
 
   let res = await fetch(url + "/switches", options);
   return res.json();
-
 }
 
 async function submitCombo(top, stem, bottom) {
@@ -47,7 +46,7 @@ export default function FrankenForm() {
     Spring: {part: [], error: "c"},
     "Bottom Housing": {part: [], error: "d"},
   });
-  const [invalid, setInvalid] = React.useState(false);
+  const [invalid, setInvalid] = React.useState("");
 
   const [switchData, setSwitchData] = React.useState([""]);
 
@@ -55,6 +54,7 @@ export default function FrankenForm() {
   React.useEffect(() => {
     async function updateOptions() {
       const res = await getSwitches();
+      console.log(res);
       setSwitchData(res);
 
     }
@@ -86,12 +86,18 @@ export default function FrankenForm() {
     return parts["Top Housing"].error;
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     e.stopPropagation();
+    setInvalid("");
+    let success = await submitCombo(parts["Top Housing"], parts["Stem"], parts["Bottom Housing"])
+    console.log(success);
 
-    submitCombo(parts["Top Housing"], parts["Stem"], parts["Bottom Housing"])
-    validateFranken();
+    if (success.error) {
+      console.log("Error!!")
+      setInvalid(success.error);
+    }
+    // validateFranken();
 
     console.log(parts);
   }
@@ -100,12 +106,13 @@ export default function FrankenForm() {
     <div className={"FrankenForm"}>
       <h1 className={"FFTitle"}> Frankenswitch Submission! </h1>
       <div className={"FFContainer"}>
-        {invalid ? <Alert variant={"danger"}> {getErrorMessage()} </Alert> : ""}
-
+        <div>
+          {invalid ? <Alert variant={"danger"}> {invalid} </Alert> : ""}
+          {/*{invalid}*/}
+        </div>
 
         <Form onSubmit={(e) => {handleSubmit(e)}}>
           <Form.Group>
-
             <Input className={"FFInput"} name={"Top Housing"} type={"Switch"} setInput={setParts} input={parts} data={switchData}>
               <Form.Control.Feedback type={"invalid"}>{choiceError}</Form.Control.Feedback>
             </Input>

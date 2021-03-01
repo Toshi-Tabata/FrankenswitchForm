@@ -1,39 +1,35 @@
-from psycopg2 import connect, extensions, sql
+from db_helper import create_db, get_cursor
 from switchDataParse import get_switch_info, insert_frankenswitch
-import os
-import json
+from accessDB import add_blacklist
+"""
+Before running anything, make a PostgreSQL database (in psql):
+
+CREATE DATABASE frankenswitchform;
+CREATE USER username WITH ENCRYPTED PASSWORD 'yourpassword';
+GRANT ALL PRIVILEGES ON DATABASE frankenswitchform TO username;
+ALTER USER username CREATEDB;
+
+Create a token.json file containing
+{
+    "user": "username",
+    "password": "yourpassword"
+}
+
+Call create_blacklistDB() to create and populate the required tables
+"""
 
 
-token = os.path.split(os.path.dirname(__file__))[0]
-with open(token + '/helper/token.json') as f:
-    data = json.load(f)
-    print(data)
-    password = data["password"]
-    user = data["user"]
+def create_blacklistDB():
+    cursor = get_cursor()
+    create_db(cursor, "blacklist")
+    create_tables(cursor)
+    populate_tables(cursor)
+    fill_blacklist(cursor)
 
 
-DB_NAME = "blacklist_combo"
-conn = connect(
-    dbname=DB_NAME,
-    user=user,
-    host="localhost",
-    password=password,
-    port="5432"
-)
-
-cursor = conn.cursor()
-autocommit = extensions.ISOLATION_LEVEL_AUTOCOMMIT
-conn.set_isolation_level(autocommit)
-
-
-def create_db(name):
-    # cursor.execute("CREATE DATABASE " + DB_NAME)  # avoiding string formats due to sqli
-    cursor.execute(sql.SQL(
-        "CREATE DATABASE {}"
-    ).format(sql.Identifier(name)))
-
-
-def create_tables():
+# Note: There's a table for each part instead of a singular table since I think it's nicer to manage
+# and switch parts get sold individually instead of as a switch
+def create_tables(cursor):
     cursor.execute("CREATE TABLE manufacturer ("
                    "name VARCHAR ( 50 ) UNIQUE NOT NULL"
                    ");")
@@ -66,16 +62,8 @@ def create_tables():
                    ") > 1"
                    ");")
 
-    # cursor.execute("INSERT INTO Top(name) VALUES ('gateron'), ('cherry'), ('jwk');")
-    # cursor.execute("INSERT INTO Stem(name) VALUES ('gateron'), ('cherry'), ('jwk');")
-    # cursor.execute("INSERT INTO Bottom(name) VALUES ('gateron'), ('cherry'), ('jwk');")
-    # cursor.execute("INSERT INTO Blacklist(top, bottom, stem) VALUES ('gateron', 'jwk', 'cherry')")
-    # cursor.execute("INSERT INTO Blacklist(top, bottom, stem) VALUES ('gateron', 'cherry', 'jwk')")
-
-
-def populate_tables():
+def populate_tables(cursor):
     # cursor.execute("DROP TABLE top, bottom, stem, blacklist, manufacturer;")
-    create_tables()
 
     manufacturers, switchNames, variety = get_switch_info()
     for i in range(len(manufacturers)):
@@ -101,14 +89,10 @@ def populate_tables():
             cursor.execute(query, (switchName, manufacturer))
 
 
-# cursor.execute("DROP TABLE top, bottom, stem, blacklist, manufacturer;")
-# populate_tables()
-
-def add_blacklist(top, stem, bottom):
-    cursor.execute("INSERT INTO blacklist(top, stem, bottom) VALUES (%s, %s, %s);", (top, stem, bottom))
-
-
-def fill_blacklist():
+# Fills blacklist TABLE with known blacklisted combinations.
+# Currently hardcoded for panda/outemu/mod/cherry/outemu switch combinations.
+# TODO: allow blacklist submissions and get more blacklisted combinations from community
+def fill_blacklist(cursor):
     cursor.execute("SELECT * FROM top WHERE name LIKE '%panda%' AND manufacturer LIKE 'bsun%';")
     cursor.execute("SELECT * FROM top WHERE manufacturer='outemu';")
     bottoms = cursor.fetchall()
@@ -121,48 +105,5 @@ def fill_blacklist():
 
     for top in tops:
         for bottom in bottoms:
-            add_blacklist(top[0], None, bottom[0])
-
-# fill_blacklist()  # run this if you need to populate blacklist again
-
-def get_switches():
-    cursor.execute("SELECT * FROM top;")
-    switches = cursor.fetchall()
-
-    res = []
-    for switch in switches:
-        # TODO: this was short sighted since i need to undo this when it gets the info back. let frontend handle it?
-        string = switch[1] + " " + switch[0] if switch[1] else switch[0]
-        res.append(string)
-
-    res.sort()
-    return res
-
-def submitCombo(top, stem, bottom):
-    # silent white, phoenix
-    print("checking", top, stem, bottom)
-    cursor.execute("SELECT * FROM blacklist WHERE "
-                   "(top, bottom) = (%s, %s) OR"
-                   "(top, stem) = (%s, %s) OR"
-                   "(stem, bottom) = (%s, %s);", (top, bottom, top, stem, stem, bottom))
-
-    found = cursor.fetchall()
-    if len(found) > 0:
-        # TODO: handle error
-        invalid = [part for part in found[0] if part is not None]
-        msg = "Invalid combo with "
-        msg += ', '.join(invalid)
-        return msg
-    else:
-        # TODO: add to spreadsheet
-        insert_frankenswitch(top, stem, bottom)
-        return ""
-
-
-def close():
-    conn.commit()
-    cursor.close()
-    conn.close()
-
-
+            add_blacklist(top[0], None, bottom[0], cursor)
 
