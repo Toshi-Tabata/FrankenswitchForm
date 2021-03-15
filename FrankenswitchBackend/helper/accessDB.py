@@ -14,7 +14,6 @@ def get_switches(cursor):
     res = []
     for switch in switches:
         manu = switch[1] if switch[1] is not None else "None"
-        print(manu)
         data = {
             "manufacturer": manu,
             "name": switch[0]
@@ -25,9 +24,8 @@ def get_switches(cursor):
     return res
 
 
-def submitCombo(top, stem, bottom, cursor):
+def submitCombo(top, stem, bottom, cursor, name):
     # TODO: silent white, phoenix shoudl get blacklisted
-    print("checking", top, stem, bottom)
     topName = top["name"]
     stemName = stem["name"]
     bottomName = bottom["name"]
@@ -49,11 +47,9 @@ def submitCombo(top, stem, bottom, cursor):
         msg += ', '.join(invalid)
         return msg
     elif was_made:
-        print(was_made)
-        print("This has already been submitted")
         return "Switch has already been submitted"
     else:
-        insert_frankenswitch(top, stem, bottom)
+        insert_frankenswitch(top, stem, bottom, name)
         add_frankenswitch(topName, stemName, bottomName, cursor)
         return ""
 

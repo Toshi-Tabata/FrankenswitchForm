@@ -6,16 +6,16 @@
 
 - Given 30 hrs and 6 weeks, we get around 5 hrs a week. This project will take way longer though.
 
-| Weekly/five-hourly goal      | Requirement                                                  |
-| ---------------------------- | ------------------------------------------------------------ |
-| Hour 0-5                     | Create frontend UI for the form. Components created and used together |
-| Hour 5-10                    | Add repository. Start learning how to create a database/use SQL. Create a small python database for blacklisted combinations. Further break down requirements as project gets approved. |
-| Hour 10-15                   | Database created and information can be retrieved from it. Python backend and API created. Frontend and backend can communicate with each other. Error messages correctly display when blacklisted combos given. |
-| Hour 15-20                   | User authentication using Google login added. Create routes for login and form submission. Backend should correctly submit combos to spreadsheet. Authenticated users should appear on the spreadsheet. |
-| Hour 20-25                   | XSS Vulnerabilities tested. SQL Injections Tested. Format String vulnerabilities tested. Report started. |
-| Hour 25-30                   | Finish adding switches to database. Add bonus requirements like text feedback/additional notes. |
-| Hour 30-35                   | Finish report. Website hosted. Get feedback from the community. Write report on feedback. |
-| Extra hours (5-10 hrs total) | General blog posts (4 hrs total) about progress. Planning out project. |
+| Weekly/five-hourly goal      | Requirement                                                  | Done |
+| ---------------------------- | ------------------------------------------------------------ | ---- |
+| Hour 0-5                     | Create frontend UI for the form. Components created and used together | y    |
+| Hour 5-10                    | Add repository. Start learning how to create a database/use SQL. Create a small python database for blacklisted combinations. Further break down requirements as project gets approved. | y    |
+| Hour 10-15                   | Database created and information can be retrieved from it. Python backend and API created. Frontend and backend can communicate with each other. Error messages correctly display when blacklisted combos given. | y    |
+| Hour 15-20                   | User authentication using Google login added. Create routes for login and form submission. Backend should correctly submit combos to spreadsheet. Authenticated users should appear on the spreadsheet. | y    |
+| Hour 20-25                   | XSS Vulnerabilities tested. SQL Injections Tested. Format String vulnerabilities tested. Report started. |      |
+| Hour 25-30                   | Finish adding switches to database. Add bonus requirements like text feedback/additional notes. | y    |
+| Hour 30-35                   | Finish report. Website hosted. Get feedback from the community. Write report on feedback. |      |
+| Extra hours (5-10 hrs total) | General blog posts (4 hrs total) about progress. Planning out project. |      |
 
 
 

@@ -44,19 +44,20 @@ def get_switch_info():
     values = result.get("valueRanges", [])
     if values:
         # TODO: don't index randomly like this, need to check if values[0, 1, 2] are defined
-        # pprint.pprint(values)
+
         return values[0]["values"], values[1]["values"], values[2]["values"]
 
 
-def insert_frankenswitch(top, stem, bottom):
+# TODO: use spread operator here and just pass in the args* into the array
+def insert_frankenswitch(top, stem, bottom, name):
     sheet = get_sheet()
     values = [
-        [top, stem, bottom]
+        [top, stem, bottom, name]
     ]
     body = {
         "values": values
     }
     result = sheet.values().append(
-        spreadsheetId=frankenswitch_sheet, range="Sheet1!B3:D",
+        spreadsheetId=frankenswitch_sheet, range="Sheet1!B3:E",
         valueInputOption="RAW", body=body).execute()
     print(result)

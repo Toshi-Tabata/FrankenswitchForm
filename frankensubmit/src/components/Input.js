@@ -8,20 +8,6 @@ import top from "../img/topHousing.svg";
 import bottom from "../img/bottomHousing.svg";
 import spring from "../img/spring.svg";
 
-async function getDataFromBackend(type) {
-
-  // switch (type) {
-  //   case "Switch":
-  //     return ["gateron", "jwk", "cherry"];
-  //
-  //   case "Spring":
-  //     return ["Any", "68g", "100g", "78g"];
-  //
-  //   default:
-  //     return [""];
-  // }
-}
-
 function getPart(part) {
   let altText = "";
   let img = null;
@@ -95,7 +81,7 @@ export default function Input(props) {
           <div>
             {option.name}
             <div>
-              <small>Manufacturer: {option.manufacturer}</small>
+              <small>Manufacturer: {option.manufacturer ? option.manufacturer : ""}</small>
             </div>
           </div>
         )}
