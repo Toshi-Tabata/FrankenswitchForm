@@ -6,6 +6,7 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 import pprint
+import json
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive.scripts', 'https://www.googleapis.com/auth/script.external_request']
 # Switch database
@@ -48,11 +49,26 @@ def get_switch_info():
         return values[0]["values"], values[1]["values"], values[2]["values"]
 
 
+# TODO: create a database to store verified users and make a way for admins to add new users
+#   how would we add a user though, since email is insecure, and I'm not sure how to get someone else's googleId
+
+
 # TODO: use spread operator here and just pass in the args* into the array
-def insert_frankenswitch(top, stem, bottom, name):
+def insert_frankenswitch(top, stem, bottom, info):
+    path = os.path.split(os.path.dirname(__file__))[0]
+    with open(path + '/helper/verified_users.json') as file:
+        data = json.load(file)
+        VERIFIED_USERS = set(data["users"])
+
+    rows = [top, stem, bottom]
+    if info is not None and "google" in info and info["google"] is not None:
+        rows.append(info["google"]["Is"]["sd"])
+        if info["google"]["googleId"] in VERIFIED_USERS:
+            rows.append("Verified")
+
     sheet = get_sheet()
     values = [
-        [top, stem, bottom, name]
+        rows
     ]
     body = {
         "values": values
@@ -60,4 +76,4 @@ def insert_frankenswitch(top, stem, bottom, name):
     result = sheet.values().append(
         spreadsheetId=frankenswitch_sheet, range="Sheet1!B3:E",
         valueInputOption="RAW", body=body).execute()
-    print(result)
+

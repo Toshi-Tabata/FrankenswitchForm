@@ -6,3 +6,4 @@ foo.txt
 node_modules/
 tmp.js
 tmp.html
+verified_users.json

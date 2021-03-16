@@ -24,7 +24,7 @@ def get_switches(cursor):
     return res
 
 
-def submitCombo(top, stem, bottom, cursor, name):
+def submitCombo(top, stem, bottom, cursor, info):
     # TODO: silent white, phoenix shoudl get blacklisted
     topName = top["name"]
     stemName = stem["name"]
@@ -49,7 +49,7 @@ def submitCombo(top, stem, bottom, cursor, name):
     elif was_made:
         return "Switch has already been submitted"
     else:
-        insert_frankenswitch(top, stem, bottom, name)
+        insert_frankenswitch(top, stem, bottom, info)
         add_frankenswitch(topName, stemName, bottomName, cursor)
         return ""
 

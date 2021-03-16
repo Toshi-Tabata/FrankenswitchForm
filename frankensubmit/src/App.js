@@ -7,6 +7,7 @@ import SubmitSuccess from "./views/SubmitSuccess.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Login from "./views/Login.js";
+import Submit from "./views/Submit.js";
 
 
 function App() {
@@ -19,9 +20,10 @@ function App() {
         </Route>
 
         <Route path="/submit">
-          <div className="App">
-            <FrankenForm />
-          </div>
+          <Submit className="App">
+
+          </Submit>
+
         </Route>
 
         <Route path="/success">

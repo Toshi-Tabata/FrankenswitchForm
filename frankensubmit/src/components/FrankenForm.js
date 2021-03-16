@@ -25,15 +25,18 @@ async function getSwitches() {
 async function submitCombo(top, stem, bottom, info) {
   const url = `http://localhost:1337`;
 
-  const username = info.google.Is.sd;
-  console.log(username);
-
   const options = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({top, stem, bottom, username})
+    body: JSON.stringify(
+      {
+        top,
+        stem,
+        bottom,
+        info,
+      })
   };
 
   let res = await fetch(url + "/submit", options);
@@ -76,7 +79,10 @@ export default function FrankenForm() {
     e.preventDefault();
     e.stopPropagation();
     setInvalid("");
-    let success = await submitCombo(parts["Top Housing"], parts["Stem"], parts["Bottom Housing"], {google: location.state.google})
+    let info = {
+      google: location.state ? location.state.google : null,
+    }
+    let success = await submitCombo(parts["Top Housing"], parts["Stem"], parts["Bottom Housing"], info)
 
     // TODO: better error handler, allow other error types to be displayed like warnings
     //  Backend should return a dict with key=type of error, value = warning?
@@ -100,18 +106,37 @@ export default function FrankenForm() {
         <Form onSubmit={(e) => {handleSubmit(e)}}>
           <Form.Group>
             <Input className={"FFInput"} name={"Top Housing"} type={"Switch"} setInput={setParts} input={parts} data={switchData}>
-              <Form.Control.Feedback type={"invalid"}>{choiceError}</Form.Control.Feedback>
+              <Form.Control.Feedback type={"invalid"}>
+                <div className="FrankenFormError">
+                  {choiceError}
+                </div>
+              </Form.Control.Feedback>
             </Input>
 
             <Input className={"FFInput"} name={"Stem"} type={"Switch"} setInput={setParts} input={parts} data={switchData}>
-              <Form.Control.Feedback type={"invalid"}>{choiceError}</Form.Control.Feedback>
+              <Form.Control.Feedback type={"invalid"} className="FrankenFormError">
+                <div className="FrankenFormError">
+                  {choiceError}
+                </div>
+              </Form.Control.Feedback>
             </Input>
+
             <Input className={"FFInput"} name={"Spring"} type={"Spring"} setInput={setParts} input={parts} data={switchData}>
-              <Form.Control.Feedback type={"invalid"}>{choiceError}</Form.Control.Feedback>
+              <Form.Control.Feedback type={"invalid"}>
+                <div className="FrankenFormError">
+                  {choiceError}
+                </div>
+              </Form.Control.Feedback>
             </Input>
+
             <Input className={"FFInput"} name={"Bottom Housing"} type={"Switch"} setInput={setParts} input={parts} data={switchData}>
-              <Form.Control.Feedback type={"invalid"}>{choiceError}</Form.Control.Feedback>
+              <Form.Control.Feedback type={"invalid"}>
+                <div className="FrankenFormError">
+                  {choiceError}
+                </div>
+              </Form.Control.Feedback>
             </Input>
+
             <Button variant="dark" type="submit">
               Submit
             </Button>

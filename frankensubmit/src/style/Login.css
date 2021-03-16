@@ -1,0 +1,40 @@
+#loginContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    margin: 0;
+
+    text-align: center;
+
+    height: 100%;
+    width: 100%;
+
+    position: relative;
+
+}
+
+#loginTitle {
+    display: flex;
+    margin-bottom: auto;
+    position: absolute;
+    top: 5%;
+}
+
+#loginButtons > * {
+    margin: 1%;
+}
+
+#loginButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+
+.loginButtons {
+    width: min(50%, 300px);
+}

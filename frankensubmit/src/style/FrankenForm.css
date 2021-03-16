@@ -17,4 +17,11 @@
 
 .FFTitle {
     margin-bottom: 2%;
+    text-align: center;
 }
+
+
+.FrankenFormError {
+    font-size: 0.75em;
+}
+

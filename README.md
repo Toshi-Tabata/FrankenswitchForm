@@ -23,26 +23,15 @@
 
 ### Frontend
 
-- Blacklisted combinations retrieved from backend
-  - Backend receives the switch combination and checks whether it is blacklisted
-  - If it is, fail it when it returns
-  - Needs to give which switch parts are failed and why it failed
-
-- User Authentication using Google Login
-  - Login screen with URL attached to it
 - Style frontend with cohesive scheme
-- Errors Shown 
-  - Invalid switch combination (blacklisted)
-  - Combo added already
+  - logout button which logs out and redirects back to login screen
 
 
 
-### Backend
+## Backend
 
-- Send API to add to spreadsheet
-- Authorised users have symbol next to name in spreadsheet
-- Flask backend server created
-  - backend can communicated to frontend
+- Add token verification from what is being sent from the frontend
+- 
 
 
 
