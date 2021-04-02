@@ -14,7 +14,7 @@ function App() {
   return (
     <BrowserRouter id="appContainer">
       <Switch>
-        <Route path="/login">
+        <Route path="/(|login)">
         {/*  TODO: create login screen */}
           <Login />
         </Route>
@@ -28,6 +28,9 @@ function App() {
 
         <Route path="/success">
           <SubmitSuccess />
+        </Route>
+        <Route path="">
+          <div> 404 not found </div>
         </Route>
 
       </Switch>

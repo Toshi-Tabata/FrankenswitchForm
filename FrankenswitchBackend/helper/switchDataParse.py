@@ -62,7 +62,8 @@ def insert_frankenswitch(top, stem, bottom, info):
 
     rows = [top, stem, bottom]
     if info is not None and "google" in info and info["google"] is not None:
-        rows.append(info["google"]["Is"]["sd"])
+        print(info["google"])
+        rows.append(info["google"]["profileObj"]["name"])
         if info["google"]["googleId"] in VERIFIED_USERS:
             rows.append("Verified")
 

@@ -16,7 +16,7 @@ export default function Login() {
     console.log(response);
 
     if (!response.error) {
-      console.log(response.Is.sd)
+      console.log(response.profileObj)
       history.push("/submit", {google: response})
 
     } else {

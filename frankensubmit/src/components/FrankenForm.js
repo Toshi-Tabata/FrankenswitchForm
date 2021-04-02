@@ -82,10 +82,18 @@ export default function FrankenForm() {
     let info = {
       google: location.state ? location.state.google : null,
     }
+    console.log(parts["Top Housing"]["part"]);
+    if (
+      parts["Top Housing"]["part"].length === 0 ||
+      parts["Stem"]["part"].length === 0 ||
+      parts["Bottom Housing"]["part"].length === 0
+    ) {
+      setInvalid("Missing Valid Switch Part");
+      return;
+    }
+
     let success = await submitCombo(parts["Top Housing"], parts["Stem"], parts["Bottom Housing"], info)
 
-    // TODO: better error handler, allow other error types to be displayed like warnings
-    //  Backend should return a dict with key=type of error, value = warning?
     if (success.error) {
       setInvalid(success.error);
     } else {
