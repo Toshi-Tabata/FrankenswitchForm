@@ -13,7 +13,20 @@
       - the user input never gets explicitly stored in the frontend and therefore never gets sent to the backend
       - The data is used to access the table of switches which is already publicly available in the frontend. 
       - The database tables are all inaccessible from the front end since no additional data is sent from the frontend to the backend outside of the GET request itself.
-      - There are two endpoints in the backend that could be attacked, one of which (the table retrieval for switches) does not accept any user input
-      - The other endpoint accepts input from a POST request which could be vulnerable to SQL injections (discussed in the next section)
-      - 
+      - The user must choose one of the options in the given list
+        - only the selections from the list is submitted to the backend
+    - There are two endpoints in the backend that could be attacked, one of which (the table retrieval for switches) does not accept any user input
+    -  The other endpoint accepts input from a POST request which could be vulnerable to SQL injections (discussed in the next section)
 
+
+
+## SQL Injection
+
+- Assuming a worst case scenario where an attacker can gain access to the backend's functions, I unit tested each function to see if I could inject code
+
+- I started with the endpoints the backend server has
+  - The `/switches` GET endpoint doesn't decode the request object that was sent to it and only returns the formatted version of the switches table.
+    - Any data sent to it didn't change its behaviour
+  - the `/submit` POST endpoint accepts user data and as long as the data isn't malformed, it will accept the data and continue
+    - if the data is malformed, it will return an error message
+    - This is possibly the entry point for an external attack since the function will accept anything that comes in the correct request format
