@@ -49,15 +49,23 @@ def submitCombo(top, stem, bottom, cursor, info):
     elif was_made:
         return "Switch has already been submitted"
     else:
-        insert_frankenswitch(top, stem, bottom, info)
-        add_frankenswitch(topName, stemName, bottomName, cursor)
-        return ""
+        success = add_frankenswitch(topName, stemName, bottomName, cursor)
+        if success:
+            insert_frankenswitch(top, stem, bottom, info)
+            return ""
+        else:
+            return "failed to insert into database"
+
 
 
 def add_frankenswitch(top, stem, bottom, cursor):
     query = "INSERT INTO frankenswitch (top, stem, bottom) VALUES(%s, %s, %s);"
-    cursor.execute(query, (top, stem, bottom))
-
+    try:
+        cursor.execute(query, (top, stem, bottom))
+        return True
+    except Exception as e:
+        print("Insert failed. Ignoring and continuing. Error was: ", e)
+        return False
 
 
 

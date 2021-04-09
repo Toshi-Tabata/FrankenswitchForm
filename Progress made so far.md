@@ -175,13 +175,24 @@ Progress made so far
   - Not really sure what to add to it
 - Submit success page has not been styled. Might delete it in favour of a success message on the same page which will be nice for submitting multiple switches
 - Added sign in as guest to login screen
-- TODO: add an indication that we're waiting on a response from the backend after submission
+- add an indication that we're waiting on a response from the backend after submission
   - Sign out button should not appear if we're logging in a guest
   - Need to differentiate between guest and user
 
 
 
+2/04/2021
 
+- Start security report
+- Went through all possible entry points of attack from a user standpoint
+- Assumed worst case where an unknown vulnerability allowed access to certain functions in the frontend that shouldn't normally be accessible
+
+
+
+8/04/2021 4:00pm - 
+
+- continue working on security report
+- 
 
 
 

@@ -23,12 +23,14 @@ def switches():
 def submit():
     req = request.json
     print(req)
+    if not req:
+        return jsonify({"error": "Invalid request given."})
     try:
         top = req["top"]["part"][0]
         stem = req["stem"]["part"][0]
         bottom = req["bottom"]["part"][0]
         info = req["info"]
-    except IndexError:
+    except (IndexError, KeyError):
         return jsonify({"error": "Missing valid switch parts"})
     # TODO: pass in the whole object instead
     error = accessDB.submitCombo(top, stem, bottom, get_cursor(), info)
