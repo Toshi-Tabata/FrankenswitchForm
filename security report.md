@@ -27,16 +27,16 @@
 - I started with the endpoints the backend server has
   - The `/switches` GET endpoint doesn't decode the request object that was sent to it and only returns the formatted version of the switches table.
     - Any data sent to it didn't change its behaviour
-    - ![image-20210408174339591](security report.assets/image-20210408174339591.png)
+    - <img src="security report.assets/image-20210408174339591.png" alt="image-20210408174339591" style="zoom:80%;" />
   - the `/submit` POST endpoint accepts user data and as long as the data isn't malformed, it will accept the data and continue
     - if the data is malformed, it will return an error message
   - This is possibly the entry point for an external attack since the function will accept anything that comes in the correct request format
-  - ![image-20210408174355747](security report.assets/image-20210408174355747.png)
-  - ![image-20210408174404700](security report.assets/image-20210408174404700.png)
+  - <img src="security report.assets/image-20210408174355747.png" alt="image-20210408174355747" style="zoom:80%;" />
+  - <img src="security report.assets/image-20210408174404700.png" alt="image-20210408174404700" style="zoom:80%;" />
 
 - Getting wedged (thanks Richard Buckland for that term) so a lot of manual testing being done.
 
-![image-20210408175423883](security report.assets/image-20210408175423883.png)
+<img src="security report.assets/image-20210408175423883.png" alt="image-20210408175423883" style="zoom:80%;" />
 
 - Trying to drop the table but it is just being passed in a string
   - Used the inbuilt string formatting from psycopg2 which is meant to prevent sql injections
