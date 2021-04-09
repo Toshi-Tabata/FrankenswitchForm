@@ -195,3 +195,7 @@ Progress made so far
 - finished security report
 - finished writing portfolio report
   - This took ages since I had so many pieces of evidence to find and move to a convenient location so the marker doesn't spend forever like I did.
+
+
+
+39 hours total

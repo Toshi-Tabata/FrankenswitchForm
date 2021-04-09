@@ -36,4 +36,17 @@ The initial requirements I proposed were predicted to take around 28 hrs which s
 
 I did try and readjust the requirements with justification but apparently that is impossible once it has been logged.
 
-Time wise, I followed through with what I set out to do, except this portfolio has taken me two hours to construct and wasn't given to us as a requirement originally so I had to cut out a lot of testing that I had planned on doing.
+
+
+## Time Spent
+
+- 39 hrs for just the project.
+  - SQL database has a lot of constraints to prevent invalid inserts
+  - I did a lot of research to find a reliable source of a list of switches (https://docs.google.com/spreadsheets/d/1TJAIiWmwYkhnI_w5xcOl_RRXZvgYcJoAfOxHFholcFE/edit)
+  - Originally this spreadsheet was not formatted nicely so I contributed to reformatting it (I didn't add this to the time I spent to the project)
+  - I parse the spreadsheet and populate my spreadsheet
+  - I had 0 experience with SQL or psycopg2 so I had to learn all of this from scratch (did not add this time to time spent)
+  - Frontend from scratch is inherently a large time sink
+  - Learning how to properly use Google's login and authenticator took a bit of time to implement, especially with React
+  - Needed to create an API/server to allow frontend to get information from backend
+- Additional 5.5 hrs across the course from blogging and writing the report and creating the video.
