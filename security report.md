@@ -44,3 +44,9 @@
 - I'm being forced to stop here for now because there was a surprise mandatory report for the something awesome project and I don't have the time budget to continue diving deeper. Leaving it in this format unless I get more time to work on it.
 - I went to great lengths while I was working on the project to prevent sql injections by never using a string format inside of an execute and any string formatting I had done was passed in using psycopg2.
 
+
+
+## Format String
+
+- Frontend takes in string input but external library handles this.
+- Backend - takes in string but python handles format string vulnerabilities.
