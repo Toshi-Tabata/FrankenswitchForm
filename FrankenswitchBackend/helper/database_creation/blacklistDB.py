@@ -91,7 +91,6 @@ def populate_tables(cursor):
 
 # Fills blacklist TABLE with known blacklisted combinations.
 # Currently hardcoded for panda/outemu/mod/cherry/outemu switch combinations.
-# TODO: allow blacklist submissions and get more blacklisted combinations from community
 def fill_blacklist(cursor):
     cursor.execute("SELECT * FROM top WHERE name LIKE '%panda%' AND manufacturer LIKE 'bsun%';")
     cursor.execute("SELECT * FROM top WHERE manufacturer='outemu';")

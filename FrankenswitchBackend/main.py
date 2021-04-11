@@ -39,5 +39,3 @@ def submit():
 
 APP.run(port=1337)
 
-# TODO: Connection never gets closed
-# accessDB.close()

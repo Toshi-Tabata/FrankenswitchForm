@@ -50,3 +50,6 @@ I did try and readjust the requirements with justification but apparently that i
   - Learning how to properly use Google's login and authenticator took a bit of time to implement, especially with React
   - Needed to create an API/server to allow frontend to get information from backend
 - Additional 5.5 hrs across the course from blogging and writing the report and creating the video.
+
+- Additional 2hrs 15 mins on this. 6pm-8:25pm.
+

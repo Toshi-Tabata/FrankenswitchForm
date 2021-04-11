@@ -25,7 +25,7 @@ def get_switches(cursor):
 
 
 def submitCombo(top, stem, bottom, cursor, info):
-    # TODO: silent white, phoenix shoudl get blacklisted
+    # e.g. silent white, phoenix should get blacklisted
     topName = top["name"]
     stemName = stem["name"]
     bottomName = bottom["name"]
@@ -55,7 +55,6 @@ def submitCombo(top, stem, bottom, cursor, info):
             return ""
         else:
             return "failed to insert into database"
-
 
 
 def add_frankenswitch(top, stem, bottom, cursor):
